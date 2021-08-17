@@ -8,15 +8,20 @@ import { Button } from "@blueprintjs/core";
 
 
 const List = () => {
-  const { showcomplete } = useContext(ItemContext);
 
   const { list } = useContext(ListContext);
   const { toggleComplete } = useContext(ListContext);
+  const { showcomplete } = useContext(ItemContext);
+	const { updateItems } = useContext(ItemContext);
 
   const { Page } = useContext(ListContext);
   const { UpatePage } = useContext(ListContext);
   const { Perpage } = useContext(ListContext);
+	const { Num } = useContext(ItemContext);
+	const { updateNum } = useContext(ItemContext);
   const { UpdatePerpage } = useContext(ListContext);
+    console.log(Num)
+
   function Next()
   {
     UpatePage(Page+1)
@@ -26,13 +31,10 @@ const List = () => {
   {
     UpatePage(Page-1)
   }
-  useEffect(() => {
-   // document.title = `To Do List: ${incomplete}`;
 
-  }, []);
 //filtering list to show all completed/non completed tasks
-const indexOfLastTodo = Page * Perpage;
-const indexOfFirstTodo = indexOfLastTodo - Perpage;
+const indexOfLastTodo = Page * Num;
+const indexOfFirstTodo = indexOfLastTodo - Num;
 const paginateTodos = list.slice(indexOfFirstTodo, indexOfLastTodo);
 
 

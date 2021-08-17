@@ -27,10 +27,6 @@ const Form = ({handleChange,handleSubmit}) => {
 
 
 <label>
-        <input type="checkbox"  onChange={handleChange} name="completed"/>
-    show everything ?
-      </label>
-<label>
   <button type="submit">Add Item</button>
 </label>
 </form>
