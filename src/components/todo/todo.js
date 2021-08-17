@@ -20,7 +20,7 @@ const [inlist, setinList] = useState([]);
 
 
 const [Page, UpatePage] = useState(1); // next+1,,prev-1
-const[Perpage,UpdatePerpage]=useState(5)
+const[Perpage,UpdatePerpage]=useState(2)
 
   //Not a state .. custom hook 
   const { handleChange, handleSubmit } = useForm(addItem);
@@ -72,7 +72,7 @@ const[Perpage,UpdatePerpage]=useState(5)
 
 {list.length >0 &&
 <ListContext.Provider
-      value={{ list, toggleComplete,setList,inlist,setinList }}
+      value={{ list, toggleComplete,setList,inlist,setinList,Page,UpatePage,Perpage,UpdatePerpage }}
     >
 <List />
     </ListContext.Provider>
