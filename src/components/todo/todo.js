@@ -11,13 +11,16 @@ import { ItemContext } from '../context/items';
 import { ListContext } from '../context/filterList';
 
 const ToDo = () => {
+	const { Num } = useContext(ItemContext);
+	const { updateNum } = useContext(ItemContext);
   const { showcomplete } = useContext(ItemContext);
+	const { updateItems } = useContext(ItemContext);
 
 
+  console.log(Num ,"heelo list")
   const [list, setList] = useState([]);
 const [incomplete, setIncomplete] = useState([]);
 const [inlist, setinList] = useState([]);
-
 
 const [Page, UpatePage] = useState(1); // next+1,,prev-1
 const[Perpage,UpdatePerpage]=useState(2)
@@ -54,7 +57,17 @@ const[Perpage,UpdatePerpage]=useState(2)
 
   }
 
+  useEffect(() => {
+    const show = localStorage.getItem('showcomplete')
+    const savedNum =  localStorage.getItem('perpage')
 
+console.log(savedNum)
+console.log(show)
+
+updateNum(savedNum)
+updateItems(show)
+    
+    }, []);
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
@@ -72,7 +85,7 @@ const[Perpage,UpdatePerpage]=useState(2)
 
 {list.length >0 &&
 <ListContext.Provider
-      value={{ list, toggleComplete,setList,inlist,setinList,Page,UpatePage,Perpage,UpdatePerpage }}
+      value={{ list, toggleComplete,setList,inlist,setinList,Page,UpatePage,Perpage,UpdatePerpage,Num }}
     >
 <List />
     </ListContext.Provider>
