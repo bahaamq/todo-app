@@ -30,9 +30,11 @@ export function  App() {
     return (
       
 <div>
-   <SignUp />
 
 <AuthContext>
+<SignUp />
+
+
    <Signin />
    <Router>
 
