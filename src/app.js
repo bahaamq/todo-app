@@ -7,8 +7,9 @@ import Setting from './components/todo/Setting.js';
 import SignUp from './components/auth/Signup'
 import Signin from './components/auth/Signin'
 import AuthContext from './components/context/auth'
+import ItemContext from './components/context/items'
+import  ListContext  from './components/context/filterList';
 
-import { ItemContext } from './components/context/items';
 
 import {
   BrowserRouter as Router,
@@ -19,13 +20,7 @@ import {
 
 export function  App() {
 
-  const [showcomplete, SetItems] = useState(false);
-  const [Num, updateNum] = useState(false);
 
-  function updateItems(value) {
-    console.log("heeello context",value)
-    SetItems(value)
-  }
 
     return (
       
@@ -36,9 +31,11 @@ export function  App() {
 
 
    <Signin />
-   <Router>
+   <ItemContext>
+     <ListContext>
+        <Router>
 
-        <Switch>
+       <Switch>
 
 <Route path="/setting">
 <div>
@@ -53,28 +50,24 @@ export function  App() {
           </ul>
         </nav>
         </div>
-<ItemContext.Provider 
-value={{ showcomplete,updateItems,Num,updateNum }}>
 
 <Setting />
-</ItemContext.Provider>
 
 </Route>
 
 
 
           <Route path="/">
-          <ItemContext.Provider
-      value={{ showcomplete,updateItems,Num,updateNum }}>
+   
 
     <ToDo />
-    </ItemContext.Provider>
           </Route>
           </Switch>
 
      
     </Router>
-
+    </ListContext>
+    </ItemContext>
 
  </AuthContext>
 
