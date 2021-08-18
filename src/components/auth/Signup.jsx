@@ -3,13 +3,14 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import "./styles.css";
 import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
+import {AuthContext} from '../context/auth'
 
 const SignUp = ({ signUp }) => {
 //   const { state } = useContext(Context);
   const [fname, setname] = useState('');
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
-  const [show, setView] = useState(true);
+  const userAuth = useContext(AuthContext);
 
   const [confPassword, setconfPassword] = useState('');
   const handleChange = (e, name) => {
@@ -31,25 +32,37 @@ const SignUp = ({ signUp }) => {
   }
 
   const handleSignUp = async (e) => {
+    userAuth.setView(false)
+
     e.preventDefault()
-try{
-const res= await axios.post('https://auth-server-401.herokuapp.com/signup', {
-    "email": email,
-    "username": fname,
-    "password": password,
-    })
+// // try{
+// // const res= await axios.post('https://auth-server-401.herokuapp.com/signup', {
+// //     "email": email,
+// //     "username": fname,
+// //     "password": password,
+// //     })
 
-console.log(res.data)
-}
+// console.log(res.data)
 
 
-catch(err)
-{
-console.log(err)
-}
+
+// console.log(userAuth.show)
+// }
+
+
+// catch(err)
+// {
+// console.log(err)
+// }
 }
   
   return (
+
+
+    <div className="center">
+    <If condition={userAuth.show}>
+    <Then>
+
     <div className="form">
         <h2 className="center">Create an Account</h2>
         <form onSubmit={handleSignUp}>
@@ -91,7 +104,13 @@ console.log(err)
 
 
     </div>
-  
+      </Then>
+<Else>
+   <button onClick={() => userAuth.setView(true)}>Back to register </button>
+   </Else>
+   </If>
+
+   </div>
   )
 }
 

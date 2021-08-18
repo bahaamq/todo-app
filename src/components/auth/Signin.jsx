@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 // import { Context } from '../../context/authContext';
 import {AuthContext} from '../context/auth'
 import "./styles.css";
+import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 
 const Signin = ({ props }) => {
   const userAuth = useContext(AuthContext);
@@ -29,7 +30,12 @@ console.log(fname)
 }
   
   return (
-    
+    <div className="center">
+      {userAuth.loggedIn &&
+        <button onClick={userAuth.logout}>Log out </button>
+}
+    <If condition={!userAuth.loggedIn}>
+    <Then>
     <div className="form">
         <h2 className="center">Sign in </h2>
         <form  onSubmit={handleSignIn}>
@@ -55,11 +61,12 @@ console.log(fname)
      
           <input type="submit" value="Sign In"/>
         </form>
-   
-{userAuth.loggedIn &&
-        <button onClick={userAuth.logout}>Log out </button>
-}
+ 
+
     </div>
+    </Then>
+   </If>
+   </div>
   )
 }
 

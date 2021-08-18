@@ -10,6 +10,7 @@ export default function Auth(props)  {
 
 const [loggedIn, setLoginState] = useState(false)
 const [userCapibility, setUser] = useState([])
+const [show, setView] = useState(true);
 
   useEffect(() => {
     const token = cookie.load('auth');
@@ -73,7 +74,7 @@ console.log(err.message)
 
     return (
       <AuthContext.Provider
-        value={{login ,loggedIn,userCapibility,logout}}
+        value={{login ,loggedIn,userCapibility,logout,show,setView}}
       >
 
       
