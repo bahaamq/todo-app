@@ -1,9 +1,12 @@
 import React from 'react';
+import { useContext } from 'react';
 
 import ToDo from './components/todo/todo.js';
 import  { useState } from 'react';
 import Setting from './components/todo/Setting.js';
-
+import SignUp from './components/auth/Signup'
+import Signin from './components/auth/Signin'
+import AuthContext from './components/context/auth'
 
 import { ItemContext } from './components/context/items';
 
@@ -15,6 +18,7 @@ import {
 } from "react-router-dom";
 
 export function  App() {
+
   const [showcomplete, SetItems] = useState(false);
   const [Num, updateNum] = useState(false);
 
@@ -23,11 +27,19 @@ export function  App() {
     SetItems(value)
   }
 
-
     return (
       
-      <Router>
- <div>
+<div>
+   <SignUp />
+
+<AuthContext>
+   <Signin />
+   <Router>
+
+        <Switch>
+
+<Route path="/setting">
+<div>
         <nav>
           <ul>
             <li>
@@ -38,10 +50,7 @@ export function  App() {
             </li>
           </ul>
         </nav>
-        <Switch>
-
-<Route path="/setting">
-
+        </div>
 <ItemContext.Provider 
 value={{ showcomplete,updateItems,Num,updateNum }}>
 
@@ -51,9 +60,7 @@ value={{ showcomplete,updateItems,Num,updateNum }}>
 </Route>
 
 
-</Switch>
 
-        <Switch>
           <Route path="/">
           <ItemContext.Provider
       value={{ showcomplete,updateItems,Num,updateNum }}>
@@ -64,9 +71,13 @@ value={{ showcomplete,updateItems,Num,updateNum }}>
           </Switch>
 
      
-      </div>
     </Router>
 
+
+ </AuthContext>
+
+      </div>
+   
   );
     ;
   }

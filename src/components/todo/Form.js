@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
+import {AuthContext} from '../context/auth'
+import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
 
 const Form = ({handleChange,handleSubmit}) => {
+  const userAuth = useContext(AuthContext);
 
 
+console.log()
   return (
     <>
   <form onSubmit={handleSubmit}>
@@ -27,7 +31,17 @@ const Form = ({handleChange,handleSubmit}) => {
 
 
 <label>
-  <button type="submit">Add Item</button>
+
+{/* <button type="submit">Show items</button> */}
+
+<If condition={userAuth.userCapibility}>
+      <Then>
+      <button type="submit">Add Item</button>
+      </Then>
+      <Else>
+        <h3 className="not-ok">Sorry, you are not allowed to add item</h3>
+      </Else>
+    </If>
 </label>
 </form>
 

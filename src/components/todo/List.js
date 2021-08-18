@@ -4,13 +4,18 @@ import { useContext } from 'react';
 import { ItemContext } from '../context/items';
 import { ListContext } from '../context/filterList';
 import { Button } from "@blueprintjs/core";
+import { If, Then, Else, When, Unless, Switch, Case, Default } from 'react-if';
+import {AuthContext} from '../context/auth'
 
 
 
 const List = () => {
+  const userAuth = useContext(AuthContext);
 
   const { list } = useContext(ListContext);
   const { toggleComplete } = useContext(ListContext);
+  const { deleteItem } = useContext(ListContext);
+
   const { showcomplete } = useContext(ItemContext);
 	const { updateItems } = useContext(ItemContext);
 
@@ -39,6 +44,7 @@ const paginateTodos = list.slice(indexOfFirstTodo, indexOfLastTodo);
 
 
 console.log(indexOfLastTodo,indexOfFirstTodo)
+console.log(userAuth)
 
   return (
 
@@ -52,7 +58,19 @@ console.log(indexOfLastTodo,indexOfFirstTodo)
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
+          <If condition={userAuth.userCapibility.includes("read")}>
+          <Then>
+          <h3 className="not-ok">Complesdsdte: ? {item.complete.toString()}</h3>
+          <button onClick={() => toggleComplete(item.id)}>Update Complete </button>
+                </Then>
+
+          <Else>
+        <h3 className="not-ok">Complesdte: ? {item.complete.toString()}</h3>
+      </Else>
+    </If>
+    <button onClick={() => deleteItem(item.id)}>Delete item </button>
+
+
           <hr />
         </div>
       ))}
@@ -65,7 +83,21 @@ console.log(indexOfLastTodo,indexOfFirstTodo)
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
+         
+
+          <If condition={userAuth.userCapibility.includes["read"]}>
+          <Then>
+          <h3 className="not-ok">Complessdsdte: ? {item.complete.toString()}</h3>
+          <button onClick={() => toggleComplete(item.id)}>Update Complete </button>
+                </Then>
+
+          <Else>
+        <h3 className="not-ok">Compsslete: ? {item.complete.toString()}</h3>
+      </Else>
+    </If>
+    <button onClick={() => deleteItem(item.id)}>Delete item </button>
+
+
           <hr />
         </div>
       ))}
@@ -82,8 +114,8 @@ list.map((item) => {
     )} */}
 
 {/* <button onClick={Prev}> Prev </button> */}
-
-<Button intent="success" text="Prev" onClick={Prev}  /> 
+{Page > 1 &&
+<Button intent="success" text="Prev" onClick={Prev}  /> }
 <Button intent="success" text="Next" onClick={Next}  /> 
 
 
