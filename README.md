@@ -11,3 +11,10 @@ https://miro.com/app/board/o9J_l1ibLvo=/
 
 Deployed-URL:
 https://d7tnl.csb.app/
+
+
+LAB 33
+MIRO:
+https://miro.com/app/board/o9J_l1zcW0g=/
+
+DEPLOYED:
