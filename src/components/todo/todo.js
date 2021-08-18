@@ -9,6 +9,7 @@ import { v4 as uuid } from 'uuid';
 
 import { ItemContext } from '../context/items';
 import { ListContext } from '../context/filterList';
+import {AuthContext} from '../context/auth'
 
 const ToDo = () => {
 	const { Num } = useContext(ItemContext);
@@ -16,8 +17,9 @@ const ToDo = () => {
   const { showcomplete } = useContext(ItemContext);
 	const { updateItems } = useContext(ItemContext);
 
+  const userAuth = useContext(AuthContext);
 
-  console.log(Num ,"heelo list")
+  console.log(userAuth.loggedIn ,"heelo list")
   const [list, setList] = useState([]);
 const [incomplete, setIncomplete] = useState([]);
 const [inlist, setinList] = useState([]);
@@ -57,6 +59,7 @@ const[Perpage,UpdatePerpage]=useState(2)
 
   }
 
+
   useEffect(() => {
     const show = localStorage.getItem('showcomplete')
     const savedNum =  localStorage.getItem('perpage')
@@ -78,21 +81,26 @@ updateItems(show)
 
   return (
     <>
+    {userAuth.loggedIn &&
 <Header incomplete={incomplete} setIncomplete={setIncomplete}/>
+}
+
+{userAuth.loggedIn &&
 
 <Form handleChange={handleChange}  handleSubmit={handleSubmit}/>
-
+}
 
 {list.length >0 &&
+userAuth.loggedIn &&
 <ListContext.Provider
-      value={{ list, toggleComplete,setList,inlist,setinList,Page,UpatePage,Perpage,UpdatePerpage,Num }}
+      value={{ list, toggleComplete,deleteItem,setList,inlist,setinList,Page,UpatePage,Perpage,UpdatePerpage,Num }}
     >
 <List />
     </ListContext.Provider>
+
+
+
 }
-
-
-
     </>
   );
 };
