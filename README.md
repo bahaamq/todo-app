@@ -17,4 +17,8 @@ LAB 33
 MIRO:
 https://miro.com/app/board/o9J_l1zcW0g=/
 
+Deplyed URL
+https://00ro0.csb.app/
+
+
 
