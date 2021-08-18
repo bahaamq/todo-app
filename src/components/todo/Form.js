@@ -34,7 +34,7 @@ console.log()
 
 {/* <button type="submit">Show items</button> */}
 
-<If condition={userAuth.userCapibility}>
+<If condition={userAuth.userCapibility.includes("create")}>
       <Then>
       <button type="submit">Add Item</button>
       </Then>

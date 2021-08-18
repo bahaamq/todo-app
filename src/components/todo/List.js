@@ -58,9 +58,9 @@ console.log(userAuth)
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
-          <If condition={userAuth.userCapibility.includes("read")}>
+          <If condition={userAuth.userCapibility.includes("update")}>
           <Then>
-          <h3 className="not-ok">Complesdsdte: ? {item.complete.toString()}</h3>
+          <h3 className="not-ok">Complete: ? {item.complete.toString()}</h3>
           <button onClick={() => toggleComplete(item.id)}>Update Complete </button>
                 </Then>
 
@@ -68,7 +68,12 @@ console.log(userAuth)
         <h3 className="not-ok">Complesdte: ? {item.complete.toString()}</h3>
       </Else>
     </If>
+    <If condition={userAuth.userCapibility.includes("delete")}>
+          <Then>
+
     <button onClick={() => deleteItem(item.id)}>Delete item </button>
+    </Then>
+    </If>
 
 
           <hr />
@@ -85,7 +90,7 @@ console.log(userAuth)
           <p><small>Difficulty: {item.difficulty}</small></p>
          
 
-          <If condition={userAuth.userCapibility.includes["read"]}>
+          <If condition={userAuth.userCapibility.includes["update"]}>
           <Then>
           <h3 className="not-ok">Complessdsdte: ? {item.complete.toString()}</h3>
           <button onClick={() => toggleComplete(item.id)}>Update Complete </button>
@@ -95,8 +100,12 @@ console.log(userAuth)
         <h3 className="not-ok">Compsslete: ? {item.complete.toString()}</h3>
       </Else>
     </If>
-    <button onClick={() => deleteItem(item.id)}>Delete item </button>
+    <If condition={userAuth.userCapibility.includes("delete")}>
+          <Then>
 
+    <button onClick={() => deleteItem(item.id)}>Delete item </button>
+    </Then>
+    </If>
 
           <hr />
         </div>
