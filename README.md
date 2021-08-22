@@ -24,3 +24,5 @@ SandBox:
 https://codesandbox.io/s/strange-flower-oqf56?file=/src/index.js:86-87
 https://oqf56.csb.app/
 
+Netlify
+https://sad-liskov-648131.netlify.app/
