@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import useForm from '../../hooks/form.js';
 import Header from './Header'
 import Form from './Form'
@@ -32,30 +34,85 @@ const[Perpage,UpdatePerpage]=useState(2)
 
   function addItem(item) {
     console.log(item);
-    item.id = uuid();
     item.complete = false;
-    setList([...list, item]);
+// Add item to database
+    axios({
+      method: "post",
+      url: "https://api-js401.herokuapp.com/api/v1/todo",
+      data: item,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(function (response) {
+        //handle success
+        console.log(response.data);
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
+    
+      setList([...list, item]);
 
   }
 
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
+
+    console.log(id)
+    const items = list.filter( item => item._id !== id );
     setList(items);
+
+    axios({
+      method: "delete",
+      url: "https://api-js401.herokuapp.com/api/v1/todo/"+id,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(function (response) {
+        //handle success
+ console.log("deleted")
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
+  
+
+
+
   }
 
   function toggleComplete(id) {
-
-    const items = list.map( item => {
-      if ( item.id == id ) {
+    console.log(id)
+// saving to db purpose
+    let currentItem={}
+    const allItems = list.map( item => {
+      if ( item._id == id ) {
+        console.log(item)
         item.complete = ! item.complete;
+        currentItem=item
       }
       return item;
+
     });
+console.log(allItems)
+    setList(allItems)
 
 
- 
- 
-     setList(items);
+
+
+    axios({
+      method: "put",
+      url: "https://api-js401.herokuapp.com/api/v1/todo/"+id,
+      headers: { "Content-Type": "application/json" },
+      data: {complete: currentItem.complete},
+    })
+      .then(function (response) {
+        //handle success
+ console.log(response.data)
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
 
   }
 
@@ -69,9 +126,28 @@ console.log(show)
 
 updateNum(savedNum)
 updateItems(show)
+
+
+    axios({
+      method: "get",
+      url: "https://api-js401.herokuapp.com/api/v1/todo"
+    })
+      .then(function (response) {
+        //handle success
+        console.log(response.data.results);
+        setList(response.data.results);
+
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
+
+
     
     }, []);
   useEffect(() => {
+    //Put method
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
    // document.title = `To Do List: ${incomplete}`;
