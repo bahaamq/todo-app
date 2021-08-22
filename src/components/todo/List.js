@@ -54,14 +54,14 @@ console.log(userAuth)
   {
        showcomplete &&
        paginateTodos.map(item => (
-        <div key={item.id}>
+        <div key={item._id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
           <If condition={userAuth.userCapibility.includes("update")}>
           <Then>
           <h3 className="not-ok">Complete: ? {item.complete.toString()}</h3>
-          <button onClick={() => toggleComplete(item.id)}>Update Complete </button>
+          <button onClick={() => toggleComplete(item._id)}>Update Complete </button>
                 </Then>
 
           <Else>
@@ -71,7 +71,7 @@ console.log(userAuth)
     <If condition={userAuth.userCapibility.includes("delete")}>
           <Then>
 
-    <button onClick={() => deleteItem(item.id)}>Delete item </button>
+    <button onClick={() => deleteItem(item._id)}>Delete item </button>
     </Then>
     </If>
 
@@ -84,7 +84,7 @@ console.log(userAuth)
        !showcomplete &&
        paginateTodos.map(item => (
    item.complete==false  &&
-        <div key={item.id}>
+        <div key={item._id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
@@ -93,7 +93,7 @@ console.log(userAuth)
           <If condition={userAuth.userCapibility.includes["update"]}>
           <Then>
           <h3 className="not-ok">Complessdsdte: ? {item.complete.toString()}</h3>
-          <button onClick={() => toggleComplete(item.id)}>Update Complete </button>
+          <button onClick={() => toggleComplete(item._id)}>Update Complete </button>
                 </Then>
 
           <Else>
@@ -103,7 +103,7 @@ console.log(userAuth)
     <If condition={userAuth.userCapibility.includes("delete")}>
           <Then>
 
-    <button onClick={() => deleteItem(item.id)}>Delete item </button>
+    <button onClick={() => deleteItem(item._id)}>Delete item </button>
     </Then>
     </If>
 
