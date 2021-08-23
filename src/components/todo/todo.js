@@ -124,7 +124,7 @@ console.log(allItems)
     }
 
     else
-    {S
+    {
       updateItems('true')
 
     }
