@@ -84,6 +84,7 @@ const[Perpage,UpdatePerpage]=useState(2)
     console.log(id)
 // saving to db purpose
     let currentItem={}
+
     const allItems = list.map( item => {
       if ( item._id == id ) {
         console.log(item)
@@ -97,35 +98,36 @@ console.log(allItems)
     setList(allItems)
 
 
-
-
-    axios({
-      method: "put",
-      url: "https://api-js401.herokuapp.com/api/v1/todo/"+id,
-      headers: { "Content-Type": "application/json" },
-      data: {complete: currentItem.complete},
-    })
-      .then(function (response) {
-        //handle success
- console.log(response.data)
-      })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
-      });
-
   }
 
 
   useEffect(() => {
-    const show = localStorage.getItem('showcomplete')
-    const savedNum =  localStorage.getItem('perpage')
+    if(localStorage.getItem('showcomplete'))
+    {
+      const show = localStorage.getItem('showcomplete')
+      updateItems(show)
 
-console.log(savedNum)
-console.log(show)
+    }
 
-updateNum(savedNum)
-updateItems(show)
+    else
+    {
+      updateItems(true)
+
+    }
+    if(localStorage.getItem('perpage'))
+    {
+      const savedNum =  localStorage.getItem('perpage')
+
+      updateNum(savedNum)
+
+    }
+else
+{
+  updateNum(Perpage)
+
+}
+
+
 
 
     axios({

@@ -20,7 +20,7 @@ import {
 export function  App() {
 
   const [showcomplete, SetItems] = useState(false);
-  const [Num, updateNum] = useState(false);
+  const [Num, updateNum] = useState(5);
 
   function updateItems(value) {
     console.log("heeello context",value)

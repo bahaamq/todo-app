@@ -10,6 +10,8 @@ import {AuthContext} from '../context/auth'
 
 
 const List = () => {
+
+
   const userAuth = useContext(AuthContext);
 
   const { list } = useContext(ListContext);
@@ -25,7 +27,7 @@ const List = () => {
 	const { Num } = useContext(ItemContext);
 	const { updateNum } = useContext(ItemContext);
   const { UpdatePerpage } = useContext(ListContext);
-    console.log(Num)
+  console.log(showcomplete)
 
   function Next()
   {
@@ -48,14 +50,13 @@ console.log(userAuth)
 
   return (
 
-
     <>
-
+{console.log(showcomplete+"tst")}
   {
-       showcomplete &&
+       showcomplete == 'true' &&
        paginateTodos.map(item => (
         <div key={item._id}>
-          <p>{item.text}</p>
+          <p>{item.text}</p> hhhhhhhhhhh
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
           <If condition={userAuth.userCapibility.includes("update")}>
@@ -81,7 +82,7 @@ console.log(userAuth)
       ))}
 
 {
-       !showcomplete &&
+       showcomplete==='false' &&
        paginateTodos.map(item => (
    item.complete==false  &&
         <div key={item._id}>
@@ -90,8 +91,8 @@ console.log(userAuth)
           <p><small>Difficulty: {item.difficulty}</small></p>
          
 
-          <If condition={userAuth.userCapibility.includes["update"]}>
-          <Then>
+          <If condition={userAuth.userCapibility.includes("update")}>
+                      <Then>
           <h3 className="not-ok">Complessdsdte: ? {item.complete.toString()}</h3>
           <button onClick={() => toggleComplete(item._id)}>Update Complete </button>
                 </Then>
