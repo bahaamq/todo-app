@@ -35,25 +35,24 @@ const SignUp = ({ signUp }) => {
     userAuth.setView(false)
 
     e.preventDefault()
-// // try{
-// // const res= await axios.post('https://auth-server-401.herokuapp.com/signup', {
-// //     "email": email,
-// //     "username": fname,
-// //     "password": password,
-// //     })
+try{
+const res= await axios.post('https://auth-server-401.herokuapp.com/signup', {
+    "email": email,
+    "username": fname,
+    "password": password,
+    })
 
-// console.log(res.data)
+console.log(res.data)
 
-
-
-// console.log(userAuth.show)
-// }
+console.log(userAuth.show)
+}
 
 
-// catch(err)
-// {
-// console.log(err)
-// }
+catch(err)
+{
+  console.log("FAILED")
+console.log(err)
+}
 }
   
   return (
