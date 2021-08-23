@@ -56,7 +56,7 @@ console.log(userAuth)
        showcomplete == 'true' &&
        paginateTodos.map(item => (
         <div key={item._id}>
-          <p>{item.text}</p> hhhhhhhhhhh
+          <p>{item.text}</p> 
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
           <If condition={userAuth.userCapibility.includes("update")}>
@@ -82,9 +82,9 @@ console.log(userAuth)
       ))}
 
 {
-       showcomplete==='false' &&
+       showcomplete =='false' &&
        paginateTodos.map(item => (
-   item.complete==false  &&
+       item.complete==false  &&
         <div key={item._id}>
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
