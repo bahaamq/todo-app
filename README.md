@@ -15,15 +15,13 @@ https://d7tnl.csb.app/
 
 LAB 33
 MIRO:
-https://miro.com/app/board/o9J_l1zcW0g=/
-
+https://codesandbox.io/s/currying-cloud-o5h7f
 Deplyed URL
 https://00ro0.csb.app/
 
 LAB 34 CRUD (auth2)
 SandBox:
-https://codesandbox.io/s/strange-flower-oqf56?file=/src/index.js:86-87
-https://oqf56.csb.app/
+https://codesandbox.io/s/currying-cloud-o5h7fhttps://oqf56.csb.app/
 
 MIRO:
 https://miro.com/app/board/o9J_l1WqszM=/
